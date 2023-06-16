@@ -1,0 +1,8 @@
+1) Note that the balanceBefore in the flashloan function in the vault is calculated using totalAssets() from ERC 4626 - uint256 balanceBefore = totalAssets();
+2) However, in the flashloan function of the vault the flashloan reverts if the shares of totalSupply - from ERC20 is not equal to balanceBefore in the ERC 4626
+   if (convertToShares(totalSupply) != balanceBefore) revert InvalidBalance(); 
+3) totalAsset implementation returns the balance of this address - return asset.balanceOf(address(this)); 
+4) We can increase the balance of this address by using the ERC20 transfer method. This will increase the balance of the token in the ERC20 without increasing 
+the totalSupply since we are not calling the deposit method. 
+5) This will cause the contract to be unusable 
+6) Big Idea : we have two different variables tracking the same thing and this should not happen. 
