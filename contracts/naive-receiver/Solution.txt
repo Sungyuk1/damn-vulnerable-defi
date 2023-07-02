@@ -1,0 +1,11 @@
+ function flashLoan(
+        IERC3156FlashBorrower receiver,
+        address token,
+        uint256 amount,
+        bytes calldata data
+    ) external returns (bool) {
+
+1) Notice that anyone can call the flashloan method and that the function does not check that only the reciever can call it. 
+2) Anyone can specifiy the address of the receiver that they wish to call it on. 
+3) Calling flashLoan with thd recievers contract as the reciver, then calling it with an amount of zero, will cause the user's contract 
+   to borrow no money but still have to pay back the really high 1 eth fixed fee

@@ -21,6 +21,7 @@ contract FlashLoanReceiver is IERC3156FlashBorrower {
         pool = _pool;
     }
 
+    //notice how the onFlashLoan function takes in an amount, and the amount to be repaid is set to the amount + fee
     function onFlashLoan(
         address,
         address token,
